@@ -1,5 +1,7 @@
 package cn.tecotaku.transtion;
 
+import android.util.Log;
+
 /**
  * Created by HakureiSino on 2016/6/4 0004.
  * 封装属性以及属性变化时间
@@ -7,13 +9,13 @@ package cn.tecotaku.transtion;
 
 public class PropertyContainer {
 
-    public double startValue;
-    public double endValue;
-    public double currentValue;
+    public float startValue;
+    public float endValue;
+    public float currentValue;
     public int duration;
     public int hasUse;
 
-    public PropertyContainer(double start, double end, int du){
+    public PropertyContainer(float start, float end, int du){
         startValue = start;
         endValue = end;
         duration = du;
@@ -27,10 +29,11 @@ public class PropertyContainer {
      * return value: -1 means animation finished else means Current Animated Value
      */
 
-    public double refresh(int delta){
-            hasUse += 1;
-            currentValue = startValue + (endValue - startValue) * (hasUse/duration);
-            if(hasUse == duration) return -1;
+    public float refresh(int delta){
+            hasUse += delta;
+            Log.i("animator", "du:"+duration+"  haspass:"+hasUse+"start:"+startValue+" current:"+currentValue+" end:"+endValue);
+            currentValue = startValue + (endValue - startValue) * (1.0f*hasUse/duration);
+            if(hasUse >= duration) return -1;
             return currentValue;
     }
 }

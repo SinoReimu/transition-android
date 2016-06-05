@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class AnimatorManager {
 
     public static ArrayList<ViewContainer> queue = new ArrayList<>();
-    public static Thread animator = new Thread(new Runnable() {
+
+    public static Runnable run = new Runnable() {
         @Override
         public void run() {
             long lasttime = -1,curr;
@@ -33,12 +34,11 @@ public class AnimatorManager {
                     }
                 }
                 lasttime = curr;
-                if (delta > 30) Log.i("Animator", delta/30+"frame missed");
+                if (delta > 30) Log.i("Animator", delta+"MILLSECONDS");
 
                 for (ViewContainer l: queue) l.refresh(delta);
             }
         }
-    });
-
-
+    };
+    public static Thread animator;
 }
