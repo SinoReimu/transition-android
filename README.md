@@ -87,13 +87,15 @@ And More in next version。。。
 
 ### TODO
 - 直接解析xml应用动画
+- 添加颜色渐变
+- 增加动画主线程稳定性以及进一步提升效率
 
 ### 版本号
 1.0.0
 
 
 ### 代码贡献
-That's Great!\
+That's Great!
 但是请在Pull Request时务必注明更改部分以及添加适当的注释
 
 
