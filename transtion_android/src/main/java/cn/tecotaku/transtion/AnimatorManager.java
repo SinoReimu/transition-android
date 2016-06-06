@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -19,6 +20,7 @@ public class AnimatorManager {
     public static ArrayList<ViewContainer> queue = new ArrayList<>();
     public static Thread animator;
     public static Activity activity;
+    public static Iterator<ViewContainer> iterator;
 
     public static Runnable run = new Runnable() {
         @Override
@@ -43,8 +45,11 @@ public class AnimatorManager {
                 }
                 lasttime = curr;
                 if (delta > 30) Log.i("Animator", delta+"MILLSECONDS");
-
-                for (ViewContainer l: queue) l.refresh(delta);
+                iterator = queue.iterator();
+                while(iterator.hasNext()){
+                    ViewContainer vc = iterator.next();
+                    vc.refresh(delta);
+                }
             }
             //LogUtil.i("activity:"+(activity==null?"null":"not")+" activity state:"+(activity.isFinishing()?"finishing":"not"));
             if (activity==null) Log.e("Error", "Not bind to a Activity yet, please use method AnimatorManager.registActivity(Activity activity) first");

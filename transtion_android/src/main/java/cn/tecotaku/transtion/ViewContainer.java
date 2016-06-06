@@ -58,8 +58,8 @@ public class ViewContainer {
             String k = (String)entry.getKey();
             float value = ((PropertyContainer)entry.getValue()).refresh(k, h);
             if(value == -1) {
-                hash.remove(k);
-                if (hash.size() == 0) AnimatorManager.queue.remove(this);
+                iter.remove();
+                if (hash.size() == 0) AnimatorManager.iterator.remove();
                 if (listener!=null) listener.onEnd();
             }
             else  PropertyUtil.setProperty(mView, k, value);
