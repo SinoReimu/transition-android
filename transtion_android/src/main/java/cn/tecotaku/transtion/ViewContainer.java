@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import cn.tecotaku.transtion.interpolator.Interpolator;
+import cn.tecotaku.transtion.interpolator.LinearInpolator;
 import cn.tecotaku.transtion.utils.PropertyUtil;
 
 /**
- * Created by Administrator on 2016/6/4 0004.
+ * Created by HakureiSino on 2016/6/4 0004.
+ * View封装
  */
 public class ViewContainer {
 
@@ -24,9 +27,12 @@ public class ViewContainer {
         setProperty(key, number, 300);
     }
 
-    public void  setProperty(String key, float number, int time){
+    public void setProperty (String key, float number, int time) {
+        setProperty(key, number, time, new LinearInpolator());
+    }
+    public void  setProperty(String key, float number, int time, Interpolator interpolator) {
         if(!hash.containsKey(key)){
-            PropertyContainer a = new PropertyContainer(PropertyUtil.getProperty(mView, key), number, time);
+            PropertyContainer a = new PropertyContainer(PropertyUtil.getProperty(mView, key), number, time, interpolator);
             hash.put(key, a);
         }else{
             PropertyContainer a = hash.get(key);
@@ -48,7 +54,7 @@ public class ViewContainer {
         while (iter.hasNext()) {
             Map.Entry entry = (Map.Entry) iter.next();
             String k = (String)entry.getKey();
-            float value = ((PropertyContainer)entry.getValue()).refresh(h);
+            float value = ((PropertyContainer)entry.getValue()).refresh(k, h);
             if(value == -1) {
                 hash.remove(k);
                 if (hash.size() == 0) AnimatorManager.queue.remove(this);

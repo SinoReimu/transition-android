@@ -6,19 +6,19 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-
-import cn.tecotaku.transtion.utils.LogUtil;
-import cn.tecotaku.transtion.utils.PropertyUtil;
 
 
 /**
- * Created by Administrator on 2016/6/5 0005.
+ * Created by HakureiSino on 2016/6/5 0005.
+ * 动画线程主要控制器
  */
+
 public class AnimatorManager {
 
     public static ArrayList<ViewContainer> queue = new ArrayList<>();
+    public static Thread animator;
+    public static Activity activity;
 
     public static Runnable run = new Runnable() {
         @Override
@@ -51,9 +51,21 @@ public class AnimatorManager {
 
         }
     };
-    public static Thread animator;
-    public static Activity activity;
+
+    public static Handler handler;
+    /*
+     *
+     */
     public static void registActivity (Activity ac){
         activity = ac;
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 0x001){
+                    ((View)msg.obj).setBackgroundColor(msg.arg1);
+                }
+            }
+        };
     }
 }

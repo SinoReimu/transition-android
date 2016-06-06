@@ -3,7 +3,8 @@ package cn.tecotaku.transtion.utils;
 import android.util.Log;
 
 /**
- * Created by Administrator on 2016/6/6 0006.
+ * Created by HakureiSino on 2016/6/6 0006.
+ * Log工具
  */
 public class LogUtil {
 

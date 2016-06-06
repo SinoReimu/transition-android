@@ -3,6 +3,7 @@ package hakurei.tweendemo;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.support.v4.animation.ValueAnimatorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 index += 1;
                 if (index %2 ==1){
-                    vd.setProperty("scaleX",1.9f,3000);
-                }else  vd.setProperty("scaleX",0.2f,3000);
+                    vd.setProperty("backgroundColor", Color.BLACK,3000);
+                }else  vd.setProperty("backgroundColor", Color.WHITE,3000);
             }
         });
 
