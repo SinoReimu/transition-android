@@ -1,4 +1,4 @@
-# transition-android
+﻿# transition-android
 
 起到和CSS中transition一样的效果，自动完成补间
 
@@ -82,17 +82,21 @@
 - Alpha
 - X
 - Y
+- backgroundColor
     
 And More in next version。。。
 
 ### TODO
 - 直接解析xml应用动画
-- 添加颜色渐变
 - 增加动画主线程稳定性以及进一步提升效率
 
 ### 版本号
-1.0.0
+1.1.0
 
+### 版本日志
+
+#### 1.1
+修复了activity关闭时动画线程延时崩溃，添加BackgroundColor渐变，添加插值器
 
 ### 代码贡献
 That's Great!
