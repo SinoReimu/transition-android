@@ -17,6 +17,7 @@ public class ViewContainer {
 
     HashMap<String, PropertyContainer> hash;
     View mView;
+    AnimatorListener listener;
 
     public ViewContainer (View view){
         mView = view;
@@ -47,6 +48,7 @@ public class ViewContainer {
             AnimatorManager.animator = new Thread(AnimatorManager.run);
             AnimatorManager.animator.start();
         }
+        if (listener!=null) listener.onStart();
     }
 
     public void refresh(int h){
@@ -58,11 +60,14 @@ public class ViewContainer {
             if(value == -1) {
                 hash.remove(k);
                 if (hash.size() == 0) AnimatorManager.queue.remove(this);
+                if (listener!=null) listener.onEnd();
             }
             else  PropertyUtil.setProperty(mView, k, value);
             mView.postInvalidate();
         }
     }
 
-
+    public void setAnimatorListener (AnimatorListener a){
+        listener = a;
+    }
 }
