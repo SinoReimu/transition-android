@@ -31,7 +31,7 @@ public class PropertyContainer {
 
     public float refresh(int delta){
             hasUse += delta;
-            Log.i("animator", "du:"+duration+"  haspass:"+hasUse+"start:"+startValue+" current:"+currentValue+" end:"+endValue);
+            //Log.i("animator", "du:"+duration+"  haspass:"+hasUse+"start:"+startValue+" current:"+currentValue+" end:"+endValue);
             currentValue = startValue + (endValue - startValue) * (1.0f*hasUse/duration);
             if(hasUse >= duration) return -1;
             return currentValue;

@@ -1,8 +1,16 @@
 package cn.tecotaku.transtion;
 
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.View;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import cn.tecotaku.transtion.utils.LogUtil;
+import cn.tecotaku.transtion.utils.PropertyUtil;
 
 
 /**
@@ -17,7 +25,7 @@ public class AnimatorManager {
         public void run() {
             long lasttime = -1,curr;
             int delta=30;
-            while (queue.size()!=0){
+            while (queue.size()!=0&&activity!=null&&!activity.isFinishing()){
                 curr = System.currentTimeMillis();
                 if (lasttime == -1) delta = 30;
                 else {
@@ -38,7 +46,14 @@ public class AnimatorManager {
 
                 for (ViewContainer l: queue) l.refresh(delta);
             }
+            //LogUtil.i("activity:"+(activity==null?"null":"not")+" activity state:"+(activity.isFinishing()?"finishing":"not"));
+            if (activity==null) Log.e("Error", "Not bind to a Activity yet, please use method AnimatorManager.registActivity(Activity activity) first");
+
         }
     };
     public static Thread animator;
+    public static Activity activity;
+    public static void registActivity (Activity ac){
+        activity = ac;
+    }
 }

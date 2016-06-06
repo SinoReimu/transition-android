@@ -1,7 +1,6 @@
 package cn.tecotaku.transtion;
 
 import android.view.View;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -54,8 +53,10 @@ public class ViewContainer {
                 hash.remove(k);
                 if (hash.size() == 0) AnimatorManager.queue.remove(this);
             }
-            else PropertyUtil.setProperty(mView, k, value);
+            else  PropertyUtil.setProperty(mView, k, value);
             mView.postInvalidate();
         }
     }
+
+
 }

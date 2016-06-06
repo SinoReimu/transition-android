@@ -1,8 +1,12 @@
 package cn.tecotaku.transtion.utils;
 
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 
 import com.nineoldandroids.view.ViewHelper;
+
+import cn.tecotaku.transtion.AnimatorManager;
 
 /**
  * Created by Administrator on 2016/6/5 0005.
@@ -43,15 +47,15 @@ public class PropertyUtil {
     public static void setProperty(View v, String key, float value){
         if(v==null) return;
         else{
-            if (key.equals("alpha")) ViewHelper.setAlpha(v, value);
-            else if (key.equals("scaleX")) ViewHelper.setScaleX(v, value);
-            else if (key.equals("scaleY")) ViewHelper.setScaleY(v, value);
-            else if (key.equals("rotationX")) ViewHelper.setRotationX(v, value);
-            else if (key.equals("rotationY")) ViewHelper.setRotationY(v, value);
-            else if (key.equals("translateX")) ViewHelper.setTranslationX(v, value);
-            else if (key.equals("translateY")) ViewHelper.setTranslationY(v, value);
-            else if (key.equals("X")) ViewHelper.setX(v, value);
-            else if (key.equals("Y"))ViewHelper.setY(v, value);
+            if (key.equals("alpha")) v.setAlpha(value);
+            else if (key.equals("scaleX")) v.setScaleX(value);
+            else if (key.equals("scaleY")) v.setScaleY(value);
+            else if (key.equals("rotationX")) v.setRotationX(value);
+            else if (key.equals("rotationY")) v.setRotationY(value);
+            else if (key.equals("translateX")) v.setTranslationX(value);
+            else if (key.equals("translateY")) v.setTranslationY(value);
+            else if (key.equals("X")) v.setX(value);
+            else if (key.equals("Y"))v.setY(value);
         }
     }
 
