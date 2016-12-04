@@ -59,7 +59,8 @@ public class PropertyUtil {
      */
 
     public static void setProperty(View v, String key, float value){
-        if(v==null) return;
+        Log.i("TAGG", AnimatorManager.isRegistActivityFront?"front":"not front");
+        if(v==null||!AnimatorManager.isRegistActivityFront) return;
         else{
             if (key.equals("alpha")) ViewHelper.setAlpha(v, value);
             else if (key.equals("scaleX")) ViewHelper.setScaleX(v,value);

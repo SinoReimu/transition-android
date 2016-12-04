@@ -4,6 +4,7 @@ import android.view.View;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import cn.tecotaku.transtion.interpolator.Interpolator;
 import cn.tecotaku.transtion.interpolator.LinearInpolator;
@@ -15,13 +16,24 @@ import cn.tecotaku.transtion.utils.PropertyUtil;
  */
 public class ViewContainer {
 
-    HashMap<String, PropertyContainer> hash;
+    public static final String ALPHA = "alpha";
+    public static final String SCALEX = "scaleX";
+    public static final String SCALEY = "scaleY";
+    public static final String ROTATIONX = "rotationX";
+    public static final String ROTATIONY = "rotationY";
+    public static final String TRANSLATEX = "translateX";
+    public static final String TRANSLATEY = "translateY";
+    public static final String X = "X";
+    public static final String Y = "Y";
+    public static final String BACKGROUNDCOLOR = "backgroundColor";
+
+    ConcurrentHashMap<String, PropertyContainer> hash;
     View mView;
     AnimatorListener listener;
 
     public ViewContainer (View view){
         mView = view;
-        hash = new HashMap<>();
+        hash = new ConcurrentHashMap<>();
     }
 
     public void  setProperty(String key, float number){
@@ -31,6 +43,7 @@ public class ViewContainer {
     public void setProperty (String key, float number, int time) {
         setProperty(key, number, time, new LinearInpolator());
     }
+
     public void  setProperty(String key, float number, int time, Interpolator interpolator) {
         if(!hash.containsKey(key)){
             PropertyContainer a = new PropertyContainer(PropertyUtil.getProperty(mView, key), number, time, interpolator);
@@ -51,7 +64,7 @@ public class ViewContainer {
         if (listener!=null) listener.onStart();
     }
 
-    public void refresh(int h){
+    protected void refresh(int h){
         Iterator iter = hash.entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry entry = (Map.Entry) iter.next();
@@ -62,7 +75,7 @@ public class ViewContainer {
                 if (hash.size() == 0) AnimatorManager.iterator.remove();
                 if (listener!=null) listener.onEnd();
             }
-            else  PropertyUtil.setProperty(mView, k, value);
+            else if(AnimatorManager.isRegistActivityFront) PropertyUtil.setProperty(mView, k, value);
             mView.postInvalidate();
         }
     }

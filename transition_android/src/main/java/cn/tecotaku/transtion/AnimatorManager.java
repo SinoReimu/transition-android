@@ -8,6 +8,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -17,17 +18,18 @@ import java.util.Iterator;
 
 public class AnimatorManager {
 
-    public static ArrayList<ViewContainer> queue = new ArrayList<>();
+    public static CopyOnWriteArrayList<ViewContainer> queue = new CopyOnWriteArrayList<>();
     public static Thread animator;
     public static Activity activity;
     public static Iterator<ViewContainer> iterator;
+    public static boolean isRegistActivityFront = false;
 
     public static Runnable run = new Runnable() {
         @Override
         public void run() {
             long lasttime = -1,curr;
             int delta=30;
-            while (queue.size()!=0&&activity!=null&&!activity.isFinishing()){
+            while (queue.size()!=0&&isRegistActivityFront&&activity!=null&&!activity.isFinishing()){
                 curr = System.currentTimeMillis();
                 if (lasttime == -1) delta = 30;
                 else {
@@ -63,6 +65,8 @@ public class AnimatorManager {
      */
     public static void registActivity (Activity ac){
         activity = ac;
+        isRegistActivityFront = true;
+        activity.getApplication().registerActivityLifecycleCallbacks(new ActivityLifeCallbacks());
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
