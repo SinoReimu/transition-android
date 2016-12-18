@@ -28,6 +28,7 @@ public class ViewContainer {
     public static final String BACKGROUNDCOLOR = "backgroundColor";
 
     ConcurrentHashMap<String, PropertyContainer> hash;
+    MaskContainer mask;
     View mView;
     AnimatorListener listener;
 
@@ -36,7 +37,19 @@ public class ViewContainer {
         hash = new ConcurrentHashMap<>();
     }
 
-    public void  setProperty(String key, float number){
+    public void setMask(int color, int toRadius, int time, Interpolator interpolator) {
+        if (mask == null) {
+            mask = new MaskContainer(mView, 1, 0,toRadius, time, color);
+        } else {
+            mask.startOffset = mask.currentOffset;
+            mask.duration = time;
+            mask.hasUse = 0;
+            mask.endOffset = 1;
+        }
+
+    }
+
+    public void setProperty(String key, float number){
         setProperty(key, number, 300);
     }
 
@@ -65,6 +78,10 @@ public class ViewContainer {
     }
 
     protected void refresh(int h){
+
+        /*refresh mask*/
+
+        /*refresh properties*/
         Iterator iter = hash.entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry entry = (Map.Entry) iter.next();
@@ -72,7 +89,7 @@ public class ViewContainer {
             float value = ((PropertyContainer)entry.getValue()).refresh(k, h);
             if(value == -1) {
                 iter.remove();
-                if (hash.size() == 0) AnimatorManager.iterator.remove();
+                if (hash.size() == 0) AnimatorManager.queue.remove(this);
                 if (listener!=null) listener.onEnd();
             }
             else if(AnimatorManager.isRegistActivityFront) PropertyUtil.setProperty(mView, k, value);

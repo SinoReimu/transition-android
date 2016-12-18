@@ -1,10 +1,13 @@
 package cn.tecotaku.transtion;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,17 +22,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class AnimatorManager {
 
     public static CopyOnWriteArrayList<ViewContainer> queue = new CopyOnWriteArrayList<>();
+    public static CopyOnWriteArrayList<MaskContainer> maskQueue = new CopyOnWriteArrayList<>();
     public static Thread animator;
     public static Activity activity;
     public static Iterator<ViewContainer> iterator;
     public static boolean isRegistActivityFront = false;
+    public static HoverMask maskFrame;
 
     public static Runnable run = new Runnable() {
         @Override
         public void run() {
             long lasttime = -1,curr;
             int delta=30;
-            while (queue.size()!=0&&isRegistActivityFront&&activity!=null&&!activity.isFinishing()){
+            while ((queue.size()!=0)&&
+                    isRegistActivityFront&&activity!=null&&!activity.isFinishing()){
                 curr = System.currentTimeMillis();
                 if (lasttime == -1) delta = 30;
                 else {
@@ -59,9 +65,53 @@ public class AnimatorManager {
         }
     };
 
+    public static Runnable maskRun = new Runnable() {
+        @Override
+        public void run() {
+            long lasttime = -1,curr;
+            int delta=30;
+            while ((maskQueue.size()!=0)&&
+                    isRegistActivityFront&&activity!=null&&!activity.isFinishing()){
+                curr = System.currentTimeMillis();
+                if (lasttime == -1) delta = 30;
+                else {
+                    try {
+                        long temp = curr - lasttime;
+                        if (temp < 30) {
+                            Thread.sleep(30 - temp);
+                            delta = 30;
+                        }
+                        else delta = (int)temp;
+                    }catch(Exception e) {
+                        e.printStackTrace();
+                        Log.e("Animator", "Animator Thrad Crashed!");
+                    }
+                }
+                lasttime = curr;
+                if (delta > 30) Log.i("Animator", delta+"MILLSECONDS");
+                if (maskFrame!=null) maskFrame.refresh(delta);
+            }
+            //LogUtil.i("activity:"+(activity==null?"null":"not")+" activity state:"+(activity.isFinishing()?"finishing":"not"));
+            if (activity==null) Log.e("Error", "Not bind to a Activity yet, please use method AnimatorManager.registActivity(Activity activity) first");
+
+        }
+    };
+
+    /*
+    *   Inject animation mask to top of view Tree
+    */
+    private static void injectMaskFrame (Activity a) {
+        maskFrame = new HoverMask(a);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        FrameLayout root = (FrameLayout)(a.getWindow().getDecorView().findViewById(android.R.id.content));
+        root.addView(maskFrame, params);
+
+    }
+
     public static Handler handler;
     /*
-     *
+     * 注册动画activity
      */
     public static void registActivity (Activity ac){
         activity = ac;
@@ -76,5 +126,6 @@ public class AnimatorManager {
                 }
             }
         };
+        injectMaskFrame(ac);
     }
 }
