@@ -79,7 +79,6 @@ public class ViewContainer {
     }
 
     protected void refresh(int h){
-
         /*refresh properties*/
         Iterator iter = hash.entrySet().iterator();
         while (iter.hasNext()) {

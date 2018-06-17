@@ -16,10 +16,12 @@
         android:background="#000000"
         android:id="@+id/helo" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World2!"
         android:background="#000000"
         android:id="@+id/helo2" />
+
 </RelativeLayout>

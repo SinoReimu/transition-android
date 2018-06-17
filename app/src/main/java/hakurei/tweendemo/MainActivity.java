@@ -9,8 +9,10 @@ import cn.tecotaku.transtion.AnimatorManager;
 import cn.tecotaku.transtion.ViewContainer;
 
 public class MainActivity extends AppCompatActivity {
+
     TextView t, t2;
     ViewContainer vd, vd2;
+
     int index = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
                     vd.setProperty("alpha", 0.8f,2000);
                     vd.setProperty("scaleX", 0.8f,2000);
                     vd.setProperty("translateX", 200f,800);
-
                     vd2.setProperty("X", index*50, 1000);
                 }else {
                     vd.setProperty("backgroundColor", Color.GREEN, 3000);

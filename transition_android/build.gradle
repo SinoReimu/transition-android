@@ -21,6 +21,7 @@ android {
 
 
 dependencies {
+
     implementation files('libs/nineoldandroids-2.4.0.jar')
 }
 
@@ -32,3 +33,4 @@ publish {
     desc = 'a library make android animation easiler'
     website = 'https://github.com/SinoReimu/transition-android'
 }
+

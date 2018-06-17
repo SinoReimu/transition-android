@@ -28,13 +28,13 @@ public class AnimatorManager {
     public static Iterator<ViewContainer> iterator;
     public static boolean isRegistActivityFront = false;
     public static HoverMask maskFrame;
-
     private final static int DEALY = 16;
 
     public static Runnable run = new Runnable() {
         @Override
         public void run() {
             long lasttime = -1,curr;
+
             int delta=DEALY;
             while ((queue.size()!=0)&&
                     isRegistActivityFront&&activity!=null&&!activity.isFinishing()){
@@ -54,7 +54,9 @@ public class AnimatorManager {
                     }
                 }
                 lasttime = curr;
+
                 if (delta > DEALY) Log.i("Animator", delta+"MILLSECONDS");
+
                 iterator = queue.iterator();
                 while(iterator.hasNext()){
                     ViewContainer vc = iterator.next();
@@ -62,11 +64,13 @@ public class AnimatorManager {
                 }
             }
 
+
             if (activity==null)
                 Log.e("Error", "Not bind to a Activity yet, please use method AnimatorManager.registActivity(Activity activity) first");
 
         }
     };
+
 
 
     /*
@@ -80,7 +84,9 @@ public class AnimatorManager {
         root.addView(maskFrame, params);
 
     }
+
 */
+
     public static Handler handler;
     /*
      * 注册动画activity
@@ -98,6 +104,8 @@ public class AnimatorManager {
                 }
             }
         };
+
         //injectMaskFrame(ac);
+
     }
 }

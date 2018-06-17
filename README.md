@@ -1,14 +1,24 @@
 ﻿# transition-android
+<<<<<<< HEAD
 用优雅的直接设置属性的方式完成动画
   起到和CSS中transition一样的效果，自动完成补间
 
 ## Tranition-Android的优势
+=======
+
+起到和CSS中transition一样的效果，自动完成补间
+
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
   - 减少代码长度
   - 提高多动画执行效率
 
 ### 过去
 做一个补间动画需要
+<<<<<<< HEAD
 ```java
+=======
+
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
         ValueAnimator s = ValueAnimator.ofFloat(0.9f,1.2f);
            s.setDuration(300);
            s.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -18,10 +28,17 @@
               }
            });
        s.start();
+<<<<<<< HEAD
 ```
 如果走到一半要回到原状态则需要
 
 ```java
+=======
+
+如果走到一半要回到原状态则需要
+
+
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
         float current = 0f;
         ValueAnimator s = ValueAnimator.ofFloat(0.9f,1.2f);
         s.setDuration(300);
@@ -48,7 +65,11 @@
             }
         });
         s.start();
+<<<<<<< HEAD
 ```
+=======
+        
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
 如果要折返三次，四次。。。
 
         无数的回调嵌套，而我们发现很多这样的动画回调是毫无意义的，因此我们引入了在CSS中用到的自动补间Transition
@@ -56,12 +77,21 @@
     
 ### 现在
 我们只需要
+<<<<<<< HEAD
 ```java
         vd = new ViewContainer(t);
         vd.setProperty("scaleX",1.9f,3000);
 ```
 如果需要在OnClick的时候让它到达另一个状态呢？
 ```java
+=======
+
+        vd = new ViewContainer(t);
+        vd.setProperty("scaleX",1.9f,3000);
+
+如果需要在OnClick的时候让它到达另一个状态呢？
+
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
         vd = new ViewContainer(t);
         vd.setProperty("scaleX",1.9f,3000);
         t.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +100,7 @@
                 vd.setProperty("scaleX",0.2f,3000);
             }
         });
+<<<<<<< HEAD
 ```
 它便会立刻从上一个动画当前状态转向0.2f进行变换 NO！need！回调！
 
@@ -82,6 +113,10 @@ dependencies {
     implementation 'cn.tecotaku:digitalnumber-android:1.0.1'
 }
 ```
+=======
+
+它便会立刻从上一个动画当前状态转向0.2f进行变换 NO！need！回调！
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
 
 ### 当前支持变换属性
 - scaleX
@@ -100,6 +135,7 @@ And More in next version。。。
 ### TODO
 - 直接解析xml应用动画
 - 增加动画主线程稳定性以及进一步提升效率
+<<<<<<< HEAD
 
 ### 版本号
 1.3.1
@@ -109,12 +145,22 @@ And More in next version。。。
 #### 1.3.1
 将动画器的帧率调整到60帧，使动画更流畅。
 
+=======
+- 增加动画线程池，对每一个ViewContainer产生一个独立线程
+
+### 版本号
+1.1.1
+
+### 版本日志
+
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
 #### 1.1.1
 修复了多动画迭代时的ComodifyException，添加多种插值器，以及动画回调。
 
 #### 1.1.0
 修复了activity关闭时动画线程延时崩溃，添加BackgroundColor渐变，添加插值器
 
+<<<<<<< HEAD
 ## 贡献
 如果你对于这个组件的改进有任何意见可以直接提出ISSUE，我会以最快的速度进行回复。或者你有自己的想法也可以加入进来，直接Pull Request就可以啦~
 
@@ -122,4 +168,15 @@ And More in next version。。。
 > Copyright (C) 2017-2018 Hoshikawa Shiro.
 > Licensed under the MIT.
 > (See the [LICENSE](https://github.com/SinoReimu/transition-android/blob/master/LICENSE) file for the whole license text.)
+=======
+### 代码贡献
+That's Great!
+但是请在Pull Request时务必注明更改部分以及添加适当的注释
+
+
+License
+----
+
+MIT
+>>>>>>> e262ab1a03d8ce9dc1512051b76bdd74b90106f8
 
