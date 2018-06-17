@@ -84,7 +84,7 @@
 
 ```groovy
 dependencies {
-    implementation 'cn.tecotaku:digitalnumber-android:1.0.1'
+    implementation 'cn.tecotaku:digitalnumber-android:1.3.1'
 }
 ```
 
