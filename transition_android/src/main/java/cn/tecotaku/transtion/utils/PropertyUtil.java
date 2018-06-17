@@ -13,7 +13,6 @@ import cn.tecotaku.transtion.AnimatorManager;
 
 /**
  * Created by HakureiSino on 2016/6/5 0005.
- * 属性操作封装工具
  */
 
 public class PropertyUtil {

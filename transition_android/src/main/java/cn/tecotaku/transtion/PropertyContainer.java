@@ -7,7 +7,6 @@ import cn.tecotaku.transtion.utils.PropertyUtil;
 
 /**
  * Created by HakureiSino on 2016/6/4 0004.
- * 封装属性以及属性变化时间
  */
 
 public class PropertyContainer {

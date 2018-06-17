@@ -57,8 +57,8 @@
 如果要折返三次，四次。。。
 
         无数的回调嵌套，而我们发现很多这样的动画回调是毫无意义的，因此我们引入了在CSS中用到的自动补间Transition
-    
-    
+
+
 ### 现在
 我们只需要
 ```java
@@ -84,7 +84,7 @@
 
 ```groovy
 dependencies {
-    implementation 'cn.tecotaku:digitalnumber-android:1.3.1'
+    implementation 'cn.tecotaku:transition_android:1.3.1'
 }
 ```
 
@@ -99,7 +99,7 @@ dependencies {
 - X
 - Y
 - backgroundColor
-    
+
 And More in next version。。。
 
 ### TODO

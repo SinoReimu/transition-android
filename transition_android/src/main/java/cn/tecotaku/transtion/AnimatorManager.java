@@ -16,7 +16,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by HakureiSino on 2016/6/5 0005.
- * 动画线程主要控制器
  */
 
 public class AnimatorManager {
