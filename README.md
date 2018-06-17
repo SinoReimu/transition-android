@@ -1,4 +1,8 @@
 ﻿# transition-android
+
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
+
 用优雅的直接设置属性的方式完成动画
   起到和CSS中transition一样的效果，自动完成补间
 
